@@ -1,0 +1,14 @@
+#!/usr/bin/perl -w
+use strict;
+open FILE, "<@ARGV" or die $!;
+open OUT, ">@ARGV.transmembrane" or die $!;
+my @file=<FILE>;
+my $file;
+foreach $file(@file) {
+    if ($file =~ m/PredHel=[1-9]/) {
+   print OUT $file;
+        }
+}
+close FILE;
+close OUT;
+    
