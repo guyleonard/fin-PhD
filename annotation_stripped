@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+use strict;
+open FILE, "<@ARGV" or die $!;
+open OUT, ">@ARGV.annotations" or die $!;
+my @file=<FILE>;
+my $count=0;
+my $file;
+my $count2;
+foreach $file(@file) {
+    if ($file =~ /^>/) {
+   print OUT $file[$count];
+      $count2=($count+1);
+      print OUT $file[$count2]; 
+        }
+    $count++;
+}
+close FILE;
+close OUT;
+    
