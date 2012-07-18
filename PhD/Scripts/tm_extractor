@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+use strict;
+
+open FILE, "<$ARGV[0]" or die $!;
+open OUT, ">$ARGV[0].transmembrane" or die $!;
+
+my $helices;
+my @file=<FILE>;
+my $file;
+foreach $file(@file) {
+        if ($file =~ m/.*?(PredHel)(=)(\d+)/is){
+                $helices=$3;
+                  if ($helices>=$ARGV[1]){
+                    print OUT $file;
+                  } 
+        }
+}
+close FILE;
+close OUT;
