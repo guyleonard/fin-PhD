@@ -21,7 +21,7 @@ nj_trees=[]
 species_list=in_alignment.taxNames
 
 # loop 1000 times
-for index in range(2):
+for index in range(1000):
 
     print "\n\nReplicate",index,":"
 
