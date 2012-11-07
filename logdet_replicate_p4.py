@@ -7,6 +7,11 @@ import sys
 read(sys.argv[1])
 in_alignment = var.alignments[0]
 
+# output filename
+
+output_bs_trees=sys.argv[1]+"_trees_file"
+
+
 # initialise lists
 bootstrapped_alignments=[]
 log_det_distance_matrices=[]
@@ -30,5 +35,13 @@ for index in range(2):
     nj_trees.append(log_det_distance_matrices[index].bionj())
     print "NJ tree generated"
 
+    #write tree to nexus
+    nj_trees[index].writeNexus(fName='output',append=1)
 
-    nj_trees[index].dump()
+
+#make consensus tree
+
+trees_partitions=TreePartitions('output')
+cons_tree=trees_partitions.consensus()
+
+consensus.dump()
