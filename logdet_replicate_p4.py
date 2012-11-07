@@ -50,7 +50,7 @@ all_tree_partitions_as_tp_object=TreePartitions(all_trees_as_trees_obj)
 # build consenus tree from tree partition object
 consensus_tree = all_tree_partitions_as_tp_object.consensus()
 
-# supports formatting
+# transfer support values to tree from support object
 for n in consensus_tree.iterInternalsNoRoot():
     n.name = "%.0f" % (100. * n.br.support)
 
