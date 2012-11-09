@@ -7,7 +7,6 @@ import sys
 # set debug status
 debug=0
 
-
 # load alignment from argument when invoking
 read(sys.argv[1])
 in_alignment = var.alignments[0]
@@ -31,16 +30,14 @@ for index in range(1000):
 
     # bootstrap replicate alignment
     bootstrapped_alignments.append(in_alignment.bootstrap())
-    print "Bootstrap generated"
 
     if debug==1:
         print bootstrapped_alignments[index]
         bootstrapped_alignments[index].writeNexus(fName=None)
 
+    print "Bootstrap generated"
 
     # make logdet distance matrix for each replicate
-    # pInvar from prottest3, doPInvarOfConstants false because don't know what pInvarconst is
-
     ld_mat=bootstrapped_alignments[index].logDet(correction='TK02', doPInvarOfConstants=True, missingCharacterStrategy='fudge', nonPositiveDetStrategy='invert')
     log_det_distance_matrices.append(ld_mat)
 
@@ -51,13 +48,16 @@ for index in range(1000):
     print "LogDet distance matrix generated"
 
     # build nj tree for each distance matrix
-
     tree=log_det_distance_matrices[index].bionj()
     nj_trees.append(tree)
+
+    if debug==1:
+        print nj_trees[index]
+        nj_trees[index].writeNexus(fName=None)
+
     print "NJ tree generated"
 
-
-    # write tree to nexus for safe keepinG
+    # write tree to nexus for safe keeping
     nj_trees[index].writeNexus(fName=output_all_trees_nexus, append=1)
 
 
