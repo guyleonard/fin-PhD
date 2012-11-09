@@ -1,11 +1,15 @@
 #!/usr/bin/python
+# Author:Finlay Maguire
+# Date:09/11/2012
+
+# Usage: python logdet_replicate_p4.py <INPUT ALIGNMENT> <DEBUG STATUS 0/1>
 
 # import all of p4 module
 from p4 import *
 import sys
 
 # set debug status
-debug=0
+debug=int(sys.argv[2])
 
 # load alignment from argument when invoking
 read(sys.argv[1])
@@ -32,6 +36,7 @@ for index in range(1000):
     bootstrapped_alignments.append(in_alignment.bootstrap())
 
     if debug==1:
+        print "\n\n-----ALIGNMENT-----\n\n"
         print bootstrapped_alignments[index]
         bootstrapped_alignments[index].writeNexus(fName=None)
 
@@ -42,6 +47,7 @@ for index in range(1000):
     log_det_distance_matrices.append(ld_mat)
 
     if debug==1:
+        print "\n\n-----MATRIX-----\n\n"
         print log_det_distance_matrices[index]
         log_det_distance_matrices[index].writeNexus(fName=None)
 
@@ -52,6 +58,7 @@ for index in range(1000):
     nj_trees.append(tree)
 
     if debug==1:
+        print "\n\n-----PHYLOGENY----\n\n"
         print nj_trees[index]
         nj_trees[index].writeNexus(fName=None)
 
