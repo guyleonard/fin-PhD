@@ -1,19 +1,20 @@
 #!usr/bin/perl -w
- 
+
 use warnings;
 use strict;
 
 #main
 &duplicate;
-sub duplicate {
-open FILE,"<", "/home/fin/Documents/PhD/Early_Phylogeny_Fusions/repair/Novosphingobium_aromaticivorans_refgen.fasta";
-my @array = <FILE>;
-close FILE;
-my @arr = grep /^>/, @array;
-my %h = ();
-map { $h{$_}++  } @arr;
-my @dupes = grep { $h{$_} > 1 } keys %h;
-@dupes = grep /^[A-Z,a-z,0-9]>/, @array;;
-}
 
+sub duplicate {
+    open FILE, "<",
+"/home/fin/Documents/PhD/Early_Phylogeny_Fusions/repair/Novosphingobium_aromaticivorans_refgen.fasta";
+    my @array = <FILE>;
+    close FILE;
+    my @arr = grep /^>/, @array;
+    my %h = ();
+    map { $h{$_}++ } @arr;
+    my @dupes = grep { $h{$_} > 1 } keys %h;
+    @dupes = grep /^[A-Z,a-z,0-9]>/, @array;
+}
 
